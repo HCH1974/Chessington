@@ -14,18 +14,37 @@ export default class Pawn extends Piece {
             if (location.row === 1 && board.getPiece(Square.at(location.row + 2, location.col)) === undefined && board.getPiece(Square.at(location.row + 1, location.col)) === undefined) {
                 moves.push(Square.at(location.row + 2, location.col))
             }
-            if (board.getPiece(Square.at(location.row + 1, location.col)) === undefined) {
+            if (((location.row !== 7) && board.getPiece(Square.at(location.row + 1, location.col)) === undefined)) {
                 moves.push(Square.at(location.row + 1, location.col))
             }
+            if (((location.row !== 7) && board.getPiece(Square.at(location.row + 1, location.col + 1)) !== undefined
+                && board.getPiece(Square.at(location.row + 1, location.col + 1)).player !== Player.WHITE)) {
+                moves.push(Square.at(location.row + 1, location.col + 1))
+            }
+            if (((location.row !== 7) && board.getPiece(Square.at(location.row + 1, location.col - 1)) !== undefined
+                && board.getPiece(Square.at(location.row + 1, location.col - 1)).player !== Player.WHITE)
+            ) {
+                moves.push(Square.at(location.row + 1, location.col - 1))
+                console.log(board.getPiece(Square.at(location.row + 1, location.col - 1)))
+            }
+
+            // && board.getPiece(Square.at(location.row + 1, location.col - 1)) !== "King"
 
         } else {
             if (location.row === 6 && board.getPiece(Square.at(location.row - 2, location.col)) === undefined && board.getPiece(Square.at(location.row - 1, location.col)) === undefined) {
                 moves.push(Square.at(location.row - 2, location.col))
             }
-            if (board.getPiece(Square.at(location.row - 1, location.col)) === undefined) {
+            if (location.row !== 0 && board.getPiece(Square.at(location.row - 1, location.col)) === undefined) {
                 moves.push(Square.at(location.row - 1, location.col))
             }
-
+            if (((location.row !== 0) && board.getPiece(Square.at(location.row - 1, location.col + 1)) !== undefined
+                && board.getPiece(Square.at(location.row - 1, location.col + 1)).player !== Player.BLACK)) {
+                moves.push(Square.at(location.row - 1, location.col + 1))
+            }
+            if (((location.row !== 0) && board.getPiece(Square.at(location.row - 1, location.col - 1)) !== undefined
+                && board.getPiece(Square.at(location.row - 1, location.col - 1)).player !== Player.BLACK)) {
+                moves.push(Square.at(location.row - 1, location.col - 1))
+            }
         }
         return moves
     }
@@ -33,6 +52,14 @@ export default class Pawn extends Piece {
 
 
 /*
-if (board.getPiece(Square.at(location.row - 1, location.col)) == undefined) {
-    moves.push(Square.at(location.row - 1, location.col))
+        it('cannot take the opposing king', () => {
+            const pawn = new Pawn(Player.WHITE);
+            const opposingKing = new King(Player.BLACK);
+            board.setPiece(Square.at(4, 4), pawn);
+            board.setPiece(Square.at(5, 3), opposingKing);
+
+            const moves = pawn.getAvailableMoves(board);
+
+            moves.should.not.deep.include(Square.at(5, 3));
+        });
     */
