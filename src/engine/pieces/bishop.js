@@ -15,7 +15,7 @@ export default class Bishop extends Piece {
             if (location.col - location.row + i >= 0 && location.col - location.row + i <= 7) {
                 if (board.getPiece(Square.at(i, location.col - location.row + i)) === undefined) {
                     moves.push(Square.at(i, location.col - location.row + i));
-                } else if (this.PieceTakerCheck(i, location.col - location.row + i, board)) {
+                } else if (this.pieceTakerCheck(i, location.col - location.row + i, board)) {
                     moves.push(Square.at(i, location.col - location.row + i));
                     break;
                 }
@@ -29,7 +29,7 @@ export default class Bishop extends Piece {
             if (location.col + location.row - i >= 0 && location.col + location.row - i <= 7) {
                 if (board.getPiece(Square.at(i, location.col + location.row - i)) === undefined) {
                     moves.push(Square.at(i, location.col + location.row - i));
-                } else if (this.PieceTakerCheck(i, location.col + location.row - i, board)) {
+                } else if (this.pieceTakerCheck(i, location.col + location.row - i, board)) {
                     moves.push(Square.at(i, location.col + location.row - i));
                     break;
                 }
@@ -43,7 +43,7 @@ export default class Bishop extends Piece {
             if (location.col - location.row + i >= 0 && location.col - location.row + i <= 7) {
                 if (board.getPiece(Square.at(i, location.col - location.row + i)) === undefined) {
                     moves.push(Square.at(i, location.col - location.row + i));
-                } else if (this.PieceTakerCheck(i, location.col - location.row + i, board)) {
+                } else if (this.pieceTakerCheck(i, location.col - location.row + i, board)) {
                     moves.push(Square.at(i, location.col - location.row + i, board));
                     break;
                 }
@@ -56,7 +56,7 @@ export default class Bishop extends Piece {
             if (location.col + location.row - i >= 0 && location.col + location.row - i <= 7) {
                 if (board.getPiece(Square.at(i, location.col + location.row - i)) === undefined) {
                     moves.push(Square.at(i, location.col + location.row - i));
-                } else if (this.PieceTakerCheck(i, location.col + location.row - i, board)) {
+                } else if (this.pieceTakerCheck(i, location.col + location.row - i, board)) {
                     moves.push(Square.at(i, location.col + location.row - i));
                     break;
                 }
@@ -69,8 +69,9 @@ export default class Bishop extends Piece {
         return moves;
     }
 
-    PieceTakerCheck(row, column, ourboard) {
-        return ourboard.getPiece(Square.at(row, column)).player !== this.player && !(ourboard.getPiece(Square.at(row, column)) instanceof King)
+    pieceTakerCheck(row, column, ourboard) {
+        return ourboard.getPiece(Square.at(row, column)).player !== this.player && !(ourboard.getPiece(Square.at(row, column)) instanceof King);
     }
+
 }
 
